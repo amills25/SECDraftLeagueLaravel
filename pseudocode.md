@@ -7,3 +7,23 @@
     -   Read is GET
     -   Update is a PUT
     -   Delete is DELETE
+    -   Google has a book API that we could use instead of Faker
+
+### MODELS
+    -   User -- CRUD
+    -   Book -- same CRUD as User
+    -   Author -- same CRUD as User
+    -   BookAuthor -- same CRUD as User
+        -   CRUD the Checkouts
+        -   Probably won't ever need a Delete for this one
+    -   Registrar (checked in/out) or BookStatus
+
+### CONTROLLERS
+    -   UserController
+    -   BooksController
+    -   AuthorsController
+    -   BookAuthorController
+    -   RegistrarController
+
+### ROUTES
+    -   Done in api.php
