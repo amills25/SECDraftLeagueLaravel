@@ -17,7 +17,7 @@ class BookFactory extends Factory
             'name' => $this->faker->name,
             'description' => $this->faker->sentence,
             'publication_year' => (string) $this->faker->year,
-            'isbn' => (string) $this->faker->barcode('isbn13')
+            'isbn' => (string) $this->faker->isbn13
         ];
     }
 }
