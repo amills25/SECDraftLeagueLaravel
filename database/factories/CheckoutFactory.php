@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\User;
+use App\Models\Book;
 
 class CheckoutFactory extends Factory
 {
@@ -14,7 +16,10 @@ class CheckoutFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'user_id' => User::all()->random()->id,
+            'book_id' => Book::all()->random()->id,
+            'checked_out' => $this->faker->dateTime($max = '-1 month', $timezone = null),
+            'checked_in' => $this->faker->dateTimeInInterval($startDate = '-1 month', $interval = 'now', $timezone = null)
         ];
     }
 }

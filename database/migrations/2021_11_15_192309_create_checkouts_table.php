@@ -30,6 +30,7 @@ class CreateCheckoutsTable extends Migration
 
             $table->timestamp('checked_out')->nullable();
             $table->timestamp('checked_in')->nullable();
+
             $table->timestamps();
         });
     }

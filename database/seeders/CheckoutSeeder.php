@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Checkout;
 
 class CheckoutSeeder extends Seeder
 {
@@ -13,6 +14,6 @@ class CheckoutSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Checkout::factory(5)->create();
     }
 }
