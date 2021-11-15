@@ -9,7 +9,7 @@ class Book extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'publication_year'];
+    protected $fillable = ['name', 'description', 'publication_year', 'isbn'];
 
     public function author()
     {
@@ -19,7 +19,8 @@ class Book extends Model
             'book_id',
             'id',
             'id',
-            'author_id'
+            'author_id',
+            'isbn'
         );
     }
 }

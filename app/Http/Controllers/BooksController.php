@@ -41,7 +41,8 @@ class BooksController extends Controller
         $book = Book::create([
             'name' => $faker->name,
             'description' => $faker->sentence,
-            'publication_year' => $faker->year
+            'publication_year' => $faker->year,
+            'isbn' => (string) $faker->barcode('isbn13')
         ]);
 
         return new BooksResource($book);

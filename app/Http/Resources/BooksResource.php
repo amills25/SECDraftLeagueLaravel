@@ -22,6 +22,7 @@ class BooksResource extends JsonResource
                 'author' => $this->author,
                 'description' => $this->description,
                 'publication_year' => $this->publication_year,
+                'isbn' => $this->isbn,
                 'created_at' => $this->created_at,
                 'updated_at' => $this->updated_at
             ]
