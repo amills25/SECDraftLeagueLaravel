@@ -19,7 +19,7 @@ class CheckoutFactory extends Factory
             'user_id' => User::all()->random()->id,
             'book_id' => Book::all()->random()->id,
             'checked_out' => $this->faker->dateTime($max = '-1 month', $timezone = null),
-            'checked_in' => $this->faker->dateTimeInInterval($startDate = '-1 month', $interval = 'now', $timezone = null)
+            'checked_in' => $this->faker->dateTimeBetween($startDate = '-1 month', $endDate = 'now', $timezone = null)
         ];
     }
 }
