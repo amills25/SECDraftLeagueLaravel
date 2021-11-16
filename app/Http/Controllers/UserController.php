@@ -92,6 +92,11 @@ class UserController extends Controller
     {
         //modify user permission or data
         //update a user's email?
+        $email = User::find($request->email);
+
+        $email = $request->input('email');
+
+        $email->save();
     }
 
     /**
