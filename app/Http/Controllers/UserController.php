@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\UserRole;
 use App\Http\Resources\UsersResource;
+use App\Models\Checkout;
 
 class UserController extends Controller
 {
@@ -117,14 +118,20 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //if the user has a role, delete the role first
-        //if a user has any checkouts, delete them first
+        $userRoles = UserRole::find($user->id)->where('user_id', $user->id)->toArray();
+        if (count($userRoles > 0)) {
+            foreach ($userRoles as $id => $userRoleItem) {
+                $user_role = UserRole::find($userRoleItem['id']);
+                $user_role->delete();
+            }
+        }
 
-        //find by userid(where)
-        $user = UserRole::find($user->id)->where('role_id', true)->toArray();
-        //foreach
-        foreach ($user as $role => $role) {
-            echo "bob";
+        $checkouts = Checkout::find($user->id)->where('user_id', $user->id)->toArray();
+        if (count($checkouts > 0)) {
+            foreach ($checkouts as $id => $checkoutItem) {
+                $checkout = Checkout::find($checkoutItem['id']);
+                $checkout->delete();
+            }
         }
 
         $user->delete();
