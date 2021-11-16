@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Checkout;
+use App\Models\Book;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Resources\CheckoutsResource;
 
@@ -23,9 +26,17 @@ class CheckoutController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        //user_id, book_id, checked_out
+        $book = Checkout::create([
+            'user_id' => $request->user()->id,
+            'book_id' => $request->book_id,
+            'checked_out' => Carbon::now()->toDateTimeString(),
+            'checked_in' => null
+        ]);
+
+        return new CheckoutsResource($book);
     }
 
     /**
@@ -39,10 +50,10 @@ class CheckoutController extends Controller
         $faker = \Faker\Factory::create(1);
 
         $book = Checkout::create([
-            'name' => $faker->name,
-            'description' => $faker->sentence,
-            'publication_year' => $faker->year,
-            'isbn' => (string) $faker->barcode('isbn13')
+            'user_id' => User::all()->random()->id,
+            'book_id' => Book::all()->random()->id,
+            'checked_out' => $this->faker->dateTime($max = '-1 month', $timezone = null),
+            'checked_in' => $this->faker->dateTimeBetween($startDate = '-1 month', $endDate = 'now', $timezone = null)
         ]);
 
         return new CheckoutsResource($book);
@@ -56,7 +67,7 @@ class CheckoutController extends Controller
      */
     public function show(Checkout $checkout)
     {
-        //
+        return new CheckoutsResource($checkout);
     }
 
     /**
@@ -77,9 +88,18 @@ class CheckoutController extends Controller
      * @param  \App\Models\Checkout  $checkout
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Checkout $checkout)
+    public function update(Request $request)
     {
-        //
+        $checkout = Checkout::find($request->id); //->where('user_id', $request->user()->id)->get();
+
+        if ($checkout->user_id == $request->user()->id) {
+            $checkout->checked_in = Carbon::now()->toDateTimeString();
+
+            $checkout->save();
+            return 'Checked in successfully!';
+        } else {
+            return 'Was not able to check in: Wrong user.';
+        }
     }
 
     /**
