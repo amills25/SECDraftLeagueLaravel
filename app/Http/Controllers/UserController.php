@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\UserRole;
 use App\Http\Resources\UsersResource;
 
 class UserController extends Controller
@@ -14,9 +15,20 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return UsersResource::collection(User::all());
+        $userRoles = UserRole::where('user_id', $request->user()->id)->get()->toArray();
+        $allowed = false;
+        foreach ($userRoles as $id => $userRole) {
+            if ($userRole['role_id'] == 1 || $userRole['role_id'] == 2) {
+                $allowed = true;
+            }
+        }
+        if ($allowed) {
+            return UsersResource::collection(User::all());
+        } else {
+            return 'User not allowed.';
+        }
     }
 
     /**
@@ -28,10 +40,10 @@ class UserController extends Controller
     {
         //create new user
         $user = User::create([
-            'name' => $request->user()->name,
-            'email' => $request->user()->email,
-            'password' => $request->user()->password,
-            'card_num' => $request->user()->card_num,
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password,
+            'card_num' => $request->card_num,
         ]);
 
         return new UsersResource($user);
@@ -90,8 +102,6 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-        //modify user permission or data
-        //update a user's email?
         $email = User::find($request->email);
 
         $email = $request->input('email');
@@ -107,6 +117,16 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        //if the user has a role, delete the role first
+        //if a user has any checkouts, delete them first
+
+        //find by userid(where)
+        $user = UserRole::find($user->id)->where('role_id', true)->toArray();
+        //foreach
+        foreach ($user as $role => $role) {
+            echo "bob";
+        }
+
         $user->delete();
         return response(null, 204);
     }

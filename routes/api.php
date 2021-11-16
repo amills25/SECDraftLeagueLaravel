@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthorsController;
 use App\Http\Controllers\BooksController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,7 @@ Route::middleware('auth:api')->prefix('v1')->group(function () {
     Route::post('/checkout', [CheckoutController::class, 'create']);
     Route::post('/checkin', [CheckoutController::class, 'update']);
 
+    Route::apiResource('/users', UserController::class);
     Route::apiResource('/authors', AuthorsController::class);
     Route::apiResource('/books', BooksController::class);
 });
