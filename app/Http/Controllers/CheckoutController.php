@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Checkout;
 use Illuminate\Http\Request;
+use App\Http\Resources\CheckoutsResource;
 
 class CheckoutController extends Controller
 {
@@ -14,7 +15,7 @@ class CheckoutController extends Controller
      */
     public function index()
     {
-        //
+        return CheckoutsResource::collection(Checkout::all());
     }
 
     /**
@@ -35,7 +36,16 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $faker = \Faker\Factory::create(1);
+
+        $book = Checkout::create([
+            'name' => $faker->name,
+            'description' => $faker->sentence,
+            'publication_year' => $faker->year,
+            'isbn' => (string) $faker->barcode('isbn13')
+        ]);
+
+        return new CheckoutsResource($book);
     }
 
     /**
