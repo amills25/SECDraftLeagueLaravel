@@ -29,14 +29,14 @@ class CheckoutController extends Controller
     public function create(Request $request)
     {
         //user_id, book_id, checked_out
-        $book = Checkout::create([
+        $checkout = Checkout::create([
             'user_id' => $request->user()->id,
             'book_id' => $request->book_id,
             'checked_out' => Carbon::now()->toDateTimeString(),
             'checked_in' => null
         ]);
 
-        return new CheckoutsResource($book);
+        return new CheckoutsResource($checkout);
     }
 
     /**
