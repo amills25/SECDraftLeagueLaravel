@@ -93,12 +93,10 @@ class AuthorsController extends Controller
      */
     public function destroy(Author $author)
     {
-        $bookAuthors = BookAuthor::find($author->id)->where('author_id', $author->id)->toArray();
-        if (count($bookAuthors > 0)) {
-            foreach ($bookAuthors as $id => $bookAuthor) {
-                $book_author = BookAuthor::find($bookAuthor['id']);
-                $book_author->delete();
-            }
+        $bookAuthors = BookAuthor::where('author_id', $author->id)->get();
+        foreach ($bookAuthors as $id => $bookAuthor) {
+            $book_author = BookAuthor::find($bookAuthor['id']);
+            $book_author->delete();
         }
 
         $author->delete();

@@ -98,20 +98,16 @@ class BooksController extends Controller
      */
     public function destroy(Book $book)
     {
-        $bookAuthors = BookAuthor::find($book->id)->where('book_id', $book->id)->toArray();
-        if (count($bookAuthors > 0)) {
-            foreach ($bookAuthors as $id => $bookAuthor) {
-                $book_author = BookAuthor::find($bookAuthor['id']);
-                $book_author->delete();
-            }
+        $bookAuthors = BookAuthor::where('book_id', $book->id)->get();
+        foreach ($bookAuthors as $id => $bookAuthor) {
+            $book_author = BookAuthor::find($bookAuthor['id']);
+            $book_author->delete();
         }
 
-        $checkouts = Checkout::find($book->id)->where('book_id', $book->id)->toArray();
-        if (count($checkouts > 0)) {
-            foreach ($checkouts as $id => $checkoutItem) {
-                $checkout = Checkout::find($checkoutItem['id']);
-                $checkout->delete();
-            }
+        $checkouts = Checkout::where('book_id', $book->id)->get();
+        foreach ($checkouts as $id => $checkoutItem) {
+            $checkout = Checkout::find($checkoutItem['id']);
+            $checkout->delete();
         }
 
         $book->delete();

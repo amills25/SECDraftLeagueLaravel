@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\UserRole;
 use App\Http\Resources\UsersResource;
 use App\Models\Checkout;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -118,20 +119,16 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $userRoles = UserRole::find($user->id)->where('user_id', $user->id)->toArray();
-        if (count($userRoles > 0)) {
-            foreach ($userRoles as $id => $userRoleItem) {
-                $user_role = UserRole::find($userRoleItem['id']);
-                $user_role->delete();
-            }
+        $userRoles = UserRole::where('user_id', $user->id)->get();
+        foreach ($userRoles as $id => $userRoleItem) {
+            $user_role = UserRole::find($userRoleItem['id']);
+            $user_role->delete();
         }
 
-        $checkouts = Checkout::find($user->id)->where('user_id', $user->id)->toArray();
-        if (count($checkouts > 0)) {
-            foreach ($checkouts as $id => $checkoutItem) {
-                $checkout = Checkout::find($checkoutItem['id']);
-                $checkout->delete();
-            }
+        $checkouts = Checkout::where('user_id', $user->id)->get();
+        foreach ($checkouts as $id => $checkoutItem) {
+            $checkout = Checkout::find($checkoutItem['id']);
+            $checkout->delete();
         }
 
         $user->delete();
