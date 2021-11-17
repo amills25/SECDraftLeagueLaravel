@@ -23,6 +23,7 @@ Route::middleware('auth:api')->prefix('v1')->group(function () {
         return $request->user();
     });
 
+    Route::get('/checkouts', [CheckoutController::class, 'index']);
     Route::post('/checkout', [CheckoutController::class, 'create']);
     Route::post('/checkin', [CheckoutController::class, 'update']);
 
