@@ -2,9 +2,6 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthorsController;
-use App\Http\Controllers\BooksController;
-use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\UserController;
 
 /*
