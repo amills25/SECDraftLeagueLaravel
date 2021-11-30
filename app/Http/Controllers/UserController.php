@@ -5,9 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
-use App\Models\UserRole;
+use App\Models\UserMembership;
 use App\Http\Resources\UsersResource;
-use App\Models\Checkout;
 use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
@@ -19,7 +18,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $userRoles = UserRole::where('user_id', $request->user()->id)->get()->toArray();
+        $userRoles = UserMembership::where('user_id', $request->user()->id)->get()->toArray();
         $allowed = false;
         foreach ($userRoles as $id => $userRole) {
             if ($userRole['role_id'] == 1) {
@@ -117,10 +116,10 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $userRoles = UserRole::where('user_id', $user->id)->get();
-        foreach ($userRoles as $id => $userRoleItem) {
-            $user_role = UserRole::find($userRoleItem['id']);
-            $user_role->delete();
+        $userMemberships = UserMembership::where('user_id', $user->id)->get();
+        foreach ($userMemberships as $id => $userMembershipItem) {
+            $user_membership = UserMembership::find($userMembershipItem['id']);
+            $user_membership->delete();
         }
 
         $user->delete();

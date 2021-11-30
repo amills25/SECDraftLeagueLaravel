@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Role;
+use App\Models\Membership;
 
-class RoleSeeder extends Seeder
+class MembershipSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,7 +16,7 @@ class RoleSeeder extends Seeder
     {
         $roleArray = ['Commissioner', 'Member'];
         for ($i=0; $i < count($roleArray); $i++) {
-            $role = new Role;
+            $role = new Membership;
             $role->label = $roleArray[$i];
             $role->save();
         }
