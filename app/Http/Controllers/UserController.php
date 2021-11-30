@@ -22,7 +22,7 @@ class UserController extends Controller
         $userRoles = UserRole::where('user_id', $request->user()->id)->get()->toArray();
         $allowed = false;
         foreach ($userRoles as $id => $userRole) {
-            if ($userRole['role_id'] == 1 || $userRole['role_id'] == 2) {
+            if ($userRole['role_id'] == 1) {
                 $allowed = true;
             }
         }
@@ -45,7 +45,6 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password,
-            'card_num' => $request->card_num,
         ]);
 
         return new UsersResource($user);
@@ -65,7 +64,6 @@ class UserController extends Controller
 
         $user = User::create([
             'name' => $faker->name,
-            'card_num' => (string) $this->faker->ean13(),
             'email' => $this->faker->unique()->safeEmail(),
             'password' => $password,
         ]);
@@ -123,12 +121,6 @@ class UserController extends Controller
         foreach ($userRoles as $id => $userRoleItem) {
             $user_role = UserRole::find($userRoleItem['id']);
             $user_role->delete();
-        }
-
-        $checkouts = Checkout::where('user_id', $user->id)->get();
-        foreach ($checkouts as $id => $checkoutItem) {
-            $checkout = Checkout::find($checkoutItem['id']);
-            $checkout->delete();
         }
 
         $user->delete();

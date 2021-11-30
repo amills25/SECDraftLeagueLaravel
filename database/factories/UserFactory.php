@@ -18,7 +18,6 @@ class UserFactory extends Factory
         $password = Hash::make('password');
         return [
             'name' => $this->faker->name(),
-            'card_num' => (string) $this->faker->ean13(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => $password,
