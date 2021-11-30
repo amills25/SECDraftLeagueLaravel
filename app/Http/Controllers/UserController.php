@@ -18,10 +18,10 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $userRoles = UserMembership::where('user_id', $request->user()->id)->get()->toArray();
+        $userMemberships = UserMembership::where('user_id', $request->user()->id)->get()->toArray();
         $allowed = false;
-        foreach ($userRoles as $id => $userRole) {
-            if ($userRole['role_id'] == 1) {
+        foreach ($userMemberships as $id => $userMembership) {
+            if ($userMembership['membership_id'] == 1) {
                 $allowed = true;
             }
         }

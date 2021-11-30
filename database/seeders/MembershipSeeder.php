@@ -14,11 +14,11 @@ class MembershipSeeder extends Seeder
      */
     public function run()
     {
-        $roleArray = ['Commissioner', 'Member'];
-        for ($i=0; $i < count($roleArray); $i++) {
-            $role = new Membership;
-            $role->label = $roleArray[$i];
-            $role->save();
+        $membershipArray = ['Commissioner', 'Member'];
+        for ($i = 0; $i < count($membershipArray); $i++) {
+            $membership = new Membership;
+            $membership->label = $membershipArray[$i];
+            $membership->save();
         }
     }
 }
