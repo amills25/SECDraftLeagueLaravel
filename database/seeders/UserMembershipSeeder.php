@@ -17,11 +17,14 @@ class UserMembershipSeeder extends Seeder
     public function run()
     {
         $users = User::all()->toArray();
-        for ($i = 0; $i < count($users); $i++) {
-            $membership = Membership::all()->random();
+        $userMembership = new UserMembership();
+        $userMembership->user_id = $users[0]['id'];
+        $userMembership->membership_id = 1;
+        $userMembership->save();
+        for ($i = 1; $i < count($users); $i++) {
             $userMembership = new UserMembership();
             $userMembership->user_id = $users[$i]['id'];
-            $userMembership->membership_id = $membership->id;
+            $userMembership->membership_id = 2;
             $userMembership->save();
         }
     }
