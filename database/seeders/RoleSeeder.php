@@ -14,7 +14,7 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        $roleArray = ['Superuser', 'Librarian', 'Cardholder'];
+        $roleArray = ['Commissioner', 'Member'];
         for ($i=0; $i < count($roleArray); $i++) {
             $role = new Role;
             $role->label = $roleArray[$i];
