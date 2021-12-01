@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\UserMembership;
 use App\Http\Resources\UsersResource;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -124,5 +125,22 @@ class UserController extends Controller
 
         $user->delete();
         return response(null, 204);
+    }
+
+    public function logout(Request $request)
+    {
+        if (Auth::user()) {
+            $user = Auth::user()->token; //token()?
+            $user->revoke();
+            return response()->json([
+                'success' => true,
+                'message' => 'Logout Successful',
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Logout Failed',
+            ]);
+        }
     }
 }
