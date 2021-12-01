@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BlogPostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,4 +22,5 @@ Route::middleware('auth:api')->prefix('v1')->group(function () {
     });
 
     Route::apiResource('/users', UserController::class);
+    Route::apiResource('/blogpost', BlogPostController::class);
 });

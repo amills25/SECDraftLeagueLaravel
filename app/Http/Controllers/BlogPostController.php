@@ -14,7 +14,7 @@ class BlogPostController extends Controller
      */
     public function index()
     {
-        //
+        return BlogPost::all();
     }
 
     /**
@@ -69,9 +69,9 @@ class BlogPostController extends Controller
      */
     public function update(Request $request)
     {
-        $blogPost = BlogPost::find(0);
+        $blogPost = BlogPost::find(1);
 
-        $blogPost = $request->input('blogPost');
+        $blogPost->content = $request->content;
 
         $blogPost->save();
     }

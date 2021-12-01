@@ -21,7 +21,11 @@ class UserMembershipSeeder extends Seeder
         $userMembership->user_id = $users[0]['id'];
         $userMembership->membership_id = 1;
         $userMembership->save();
-        for ($i = 1; $i < count($users); $i++) {
+        $userMembership = new UserMembership();
+        $userMembership->user_id = $users[1]['id'];
+        $userMembership->membership_id = 1;
+        $userMembership->save();
+        for ($i = 2; $i < count($users); $i++) {
             $userMembership = new UserMembership();
             $userMembership->user_id = $users[$i]['id'];
             $userMembership->membership_id = 2;
