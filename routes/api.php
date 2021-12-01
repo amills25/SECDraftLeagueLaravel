@@ -16,11 +16,15 @@ use App\Http\Controllers\BlogPostController;
 |
 */
 
-Route::middleware('auth:api')->prefix('v1')->group(function () {
-    Route::get('/user', function (Request $request) {
-        return $request->user();
+Route::prefix('v1')->group(function () {
+    Route::middleware('auth:api')->group(function () {
+        Route::get('/user', function (Request $request) {
+            return $request->user();
+        });
+
+        Route::apiResource('/users', UserController::class);
+        Route::post('/blogpost/edit', [BlogPostController::class, 'update']);
     });
 
-    Route::apiResource('/users', UserController::class);
-    Route::apiResource('/blogpost', BlogPostController::class);
+    Route::get('/blogpost', [BlogPostController::class, 'index']);
 });

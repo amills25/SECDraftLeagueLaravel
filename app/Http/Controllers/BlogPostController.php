@@ -69,9 +69,10 @@ class BlogPostController extends Controller
      */
     public function update(Request $request)
     {
+        // TODO: confirm user is correct type before saving
         $blogPost = BlogPost::find(1);
 
-        $blogPost->content = $request->content;
+        $blogPost->content = json_encode($request->content);
 
         $blogPost->save();
     }
