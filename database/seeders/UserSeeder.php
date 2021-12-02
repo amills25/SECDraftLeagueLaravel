@@ -24,8 +24,8 @@ class UserSeeder extends Seeder
             "Jeff Zimmer"
         ];
         $emails = [
-            "awmills25@gmail.com",
             "millskysec@gmail.com",
+            "awmills25@gmail.com",
             "joel.storrow@mcgillengineers.com",
             "dprez35@yahoo.com",
             "clark40ball@yahoo.com",

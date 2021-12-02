@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\UserMembership;
-use App\Http\Resources\UsersResource;
+use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,10 +27,17 @@ class UserController extends Controller
             }
         }
         if ($allowed) {
-            return UsersResource::collection(User::all());
+            return UserResource::collection(User::all());
         } else {
             return 'User not allowed.';
         }
+    }
+
+    public function user(Request $request)
+    {
+        $user = $request->user();
+        $userData = User::with(['userMemberships.membership'])->where('id', $user->id)->get();
+        return $userData;
     }
 
     /**
@@ -47,7 +54,7 @@ class UserController extends Controller
             'password' => $request->password,
         ]);
 
-        return new UsersResource($user);
+        return new UserResource($user);
     }
 
     /**
@@ -58,34 +65,20 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $faker = \Faker\Factory::create(1);
-
-        $password = Hash::make('password');
-
-        $user = User::create([
-            'name' => $faker->name,
-            'email' => $this->faker->unique()->safeEmail(),
-            'password' => $password,
-        ]);
-
-        return new UsersResource($user);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Checkout  $checkout
      * @return \Illuminate\Http\Response
      */
     public function show(User $user)
     {
-        return new UsersResource($user);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Checkout  $checkout
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
@@ -97,7 +90,6 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Checkout  $checkout
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
@@ -112,7 +104,6 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Checkout  $checkout
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user)
@@ -130,7 +121,7 @@ class UserController extends Controller
     public function logout(Request $request)
     {
         if (Auth::user()) {
-            $user = Auth::user()->token; //token()?
+            $user = Auth::user()->token;
             $user->revoke();
             return response()->json([
                 'success' => true,

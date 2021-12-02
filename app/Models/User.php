@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
+use App\Models\UserMembership;
 
 class User extends Authenticatable
 {
@@ -33,4 +34,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
+    public function userMemberships()
+    {
+        return $this->hasMany(UserMembership::class);
+    }
 }

@@ -18,9 +18,7 @@ use App\Http\Controllers\BlogPostController;
 
 Route::prefix('v1')->group(function () {
     Route::middleware('auth:api')->group(function () {
-        Route::get('/user', function (Request $request) {
-            return $request->user();
-        });
+        Route::get('/user', [UserController::class, 'user']);
 
         Route::apiResource('/users', UserController::class);
         Route::apiResource('/logout', UserController::class);
