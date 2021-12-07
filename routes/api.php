@@ -25,9 +25,10 @@ Route::prefix('v1')->group(function () {
         Route::post('/blogpost/edit', [BlogPostController::class, 'update']);
         Route::post('/lineup/edit', [LineupController::class, 'update']);
         Route::post('/week/edit', [WeekController::class, 'update']);
+        Route::post('/athlete/edit', [AthleteController::class, 'update']);
     });
 
     Route::get('/blogpost', [BlogPostController::class, 'index']);
     Route::get('/lineup', [LineupController::class, 'index']);
-    Route::get('/week', [WeekController::class, 'index']);
+    Route::get('/athlete', [AthleteController::class, 'index']);
 });

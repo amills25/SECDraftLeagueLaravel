@@ -15,7 +15,8 @@ class AthleteController extends Controller
      */
     public function index()
     {
-        //
+        $athletes = Athlete::all();
+        return $athletes->toArray();
     }
 
     /**
@@ -70,7 +71,11 @@ class AthleteController extends Controller
      */
     public function update(UpdateAthleteRequest $request, Athlete $athlete)
     {
-        //
+        $athlete = Athlete::find(1);
+
+        $athlete->content = json_encode($request->content);
+
+        $athlete->save();
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Athlete;
 use Illuminate\Database\Seeder;
 
 class AthleteSeeder extends Seeder
@@ -13,6 +14,8 @@ class AthleteSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Athlete::factory()
+            ->count(9)
+            ->create();
     }
 }
