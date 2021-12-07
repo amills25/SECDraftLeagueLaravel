@@ -70,6 +70,9 @@ class LineupController extends Controller
      */
     public function update(UpdateLineupRequest $request, Lineup $lineup)
     {
+        //TO DO: deconstruct generateRows helper from react
+        //AthleteController->update
+        //WeekController->update
     }
 
     /**
