@@ -15,8 +15,10 @@ class LineupSeeder extends Seeder
      */
     public function run()
     {
-        Lineup::factory()
-            ->count(6)
-            ->create();
+        for ($i = 1; $i <= 6; $i++) {
+            $lineup = new Lineup();
+            $lineup->user_id = $i;
+            $lineup->save();
+        }
     }
 }

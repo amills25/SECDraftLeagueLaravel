@@ -15,8 +15,7 @@ class LineupController extends Controller
      */
     public function index()
     {
-        $lineups = Lineup::all();
-        return $lineups->toArray();
+        return Lineup::with(['user', 'weeks.athlete'])->get();
     }
 
     /**
@@ -71,11 +70,6 @@ class LineupController extends Controller
      */
     public function update(UpdateLineupRequest $request, Lineup $lineup)
     {
-        $lineup = Lineup::find(1);
-
-        $lineup->content = json_encode($request->content);
-
-        $lineup->save();
     }
 
     /**

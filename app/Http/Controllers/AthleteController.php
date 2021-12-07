@@ -69,11 +69,12 @@ class AthleteController extends Controller
      * @param  \App\Models\Athlete  $athlete
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateAthleteRequest $request, Athlete $athlete)
+    public function update(UpdateAthleteRequest $request)
     {
-        $athlete = Athlete::find(1);
+        $athlete = Athlete::find($request->athlete_id);
 
-        $athlete->content = json_encode($request->content);
+        $athlete->name = $request->name;
+        $athlete->team = $request->team;
 
         $athlete->save();
     }

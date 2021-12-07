@@ -14,8 +14,11 @@ class AthleteSeeder extends Seeder
      */
     public function run()
     {
-        Athlete::factory()
-            ->count(9)
-            ->create();
+        for ($i = 0; $i < 54; $i++) {
+            $athlete = new Athlete();
+            $athlete->name = '';
+            $athlete->team = '';
+            $athlete->save();
+        }
     }
 }

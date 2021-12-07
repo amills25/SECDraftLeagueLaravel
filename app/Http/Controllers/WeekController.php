@@ -69,11 +69,12 @@ class WeekController extends Controller
      * @param  \App\Models\Week  $week
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateWeekRequest $request, Week $week)
+    public function update(UpdateWeekRequest $request)
     {
-        $week = Week::find(1);
+        $week = Week::find($request->week_id);
 
-        $week->content = json_encode($request->content);
+        $week->points = $request->points;
+        $week->week_number = $request->week_number;
 
         $week->save();
     }

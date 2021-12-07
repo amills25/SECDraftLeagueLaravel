@@ -14,7 +14,7 @@ class WeekFactory extends Factory
     public function definition()
     {
         return [
-            'content' => json_encode([''])
+            //
         ];
     }
 }

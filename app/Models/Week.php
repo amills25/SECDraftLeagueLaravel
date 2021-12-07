@@ -11,5 +11,15 @@ class Week extends Model
 
     protected $table = 'weeks';
 
-    protected $fillable = ['content'];
+    protected $fillable = ['athlete_id', 'lineup_id', 'points', 'week_number'];
+
+    public function athlete()
+    {
+        return $this->belongsTo(Athlete::class);
+    }
+
+    public function lineup()
+    {
+        return $this->belongsTo(Lineup::class);
+    }
 }

@@ -14,7 +14,8 @@ class AthleteFactory extends Factory
     public function definition()
     {
         return [
-            'content' => json_encode([''])
+            'name' => '',
+            'team' => ''
         ];
     }
 }

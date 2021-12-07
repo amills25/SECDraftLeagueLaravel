@@ -11,5 +11,10 @@ class Athlete extends Model
 
     protected $table = 'athletes';
 
-    protected $fillable = ['content'];
+    protected $fillable = ['name', 'team'];
+
+    public function weeks()
+    {
+        return $this->hasMany(Week::class);
+    }
 }
