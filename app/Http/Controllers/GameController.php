@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreWeeklyReportRequest;
-use App\Http\Requests\UpdateWeeklyReportRequest;
-use App\Models\WeeklyReport;
+use App\Http\Requests\StoreGameRequest;
+use App\Http\Requests\UpdateGameRequest;
+use App\Models\Game;
 
-class WeeklyReportController extends Controller
+class GameController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,10 +31,10 @@ class WeeklyReportController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreWeeklyReportRequest  $request
+     * @param  \App\Http\Requests\StoreGameRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreWeeklyReportRequest $request)
+    public function store(StoreGameRequest $request)
     {
         //
     }
@@ -42,10 +42,10 @@ class WeeklyReportController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\WeeklyReport  $weeklyReport
+     * @param  \App\Models\Game  $game
      * @return \Illuminate\Http\Response
      */
-    public function show(WeeklyReport $weeklyReport)
+    public function show(Game $game)
     {
         //
     }
@@ -53,10 +53,10 @@ class WeeklyReportController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\WeeklyReport  $weeklyReport
+     * @param  \App\Models\Game  $game
      * @return \Illuminate\Http\Response
      */
-    public function edit(WeeklyReport $weeklyReport)
+    public function edit(Game $game)
     {
         //
     }
@@ -64,11 +64,11 @@ class WeeklyReportController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateWeeklyReportRequest  $request
-     * @param  \App\Models\WeeklyReport  $weeklyReport
+     * @param  \App\Http\Requests\UpdateGameRequest  $request
+     * @param  \App\Models\Game  $game
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateWeeklyReportRequest $request, WeeklyReport $weeklyReport)
+    public function update(UpdateGameRequest $request, Game $game)
     {
         //
     }
@@ -76,10 +76,10 @@ class WeeklyReportController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\WeeklyReport  $weeklyReport
+     * @param  \App\Models\Game  $game
      * @return \Illuminate\Http\Response
      */
-    public function destroy(WeeklyReport $weeklyReport)
+    public function destroy(Game $game)
     {
         //
     }

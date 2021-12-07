@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateWeeklyReportsTable extends Migration
+class CreateGamesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateWeeklyReportsTable extends Migration
      */
     public function up()
     {
-        Schema::create('weekly_reports', function (Blueprint $table) {
+        Schema::create('games', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ class CreateWeeklyReportsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('weekly_reports');
+        Schema::dropIfExists('games');
     }
 }
