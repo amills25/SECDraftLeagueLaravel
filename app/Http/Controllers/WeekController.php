@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreGameRequest;
-use App\Http\Requests\UpdateGameRequest;
-use App\Models\Game;
+use App\Http\Requests\StoreWeekRequest;
+use App\Http\Requests\UpdateWeekRequest;
+use App\Models\Week;
 
-class GameController extends Controller
+class WeekController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,8 @@ class GameController extends Controller
      */
     public function index()
     {
-        //
+        $weeks = Week::all();
+        return $weeks->toArray();
     }
 
     /**
@@ -31,10 +32,10 @@ class GameController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreGameRequest  $request
+     * @param  \App\Http\Requests\StoreWeekRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreGameRequest $request)
+    public function store(StoreWeekRequest $request)
     {
         //
     }
@@ -42,10 +43,10 @@ class GameController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Game  $game
+     * @param  \App\Models\Week  $week
      * @return \Illuminate\Http\Response
      */
-    public function show(Game $game)
+    public function show(Week $week)
     {
         //
     }
@@ -53,10 +54,10 @@ class GameController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Game  $game
+     * @param  \App\Models\Week  $week
      * @return \Illuminate\Http\Response
      */
-    public function edit(Game $game)
+    public function edit(Week $week)
     {
         //
     }
@@ -64,22 +65,26 @@ class GameController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateGameRequest  $request
-     * @param  \App\Models\Game  $game
+     * @param  \App\Http\Requests\UpdateWeekRequest  $request
+     * @param  \App\Models\Week  $week
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateGameRequest $request, Game $game)
+    public function update(UpdateWeekRequest $request, Week $week)
     {
-        //
+        $week = Week::find(1);
+
+        $week->content = json_encode($request->content);
+
+        $week->save();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Game  $game
+     * @param  \App\Models\Week  $week
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Game $game)
+    public function destroy(Week $week)
     {
         //
     }

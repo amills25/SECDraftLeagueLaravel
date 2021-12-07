@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Week;
 use Illuminate\Database\Seeder;
 
-class GameSeeder extends Seeder
+class WeekSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,6 +14,8 @@ class GameSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Week::factory()
+            ->count(10)
+            ->create();
     }
 }

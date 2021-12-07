@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class GameFactory extends Factory
+class WeekFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -14,7 +14,7 @@ class GameFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'content' => json_encode([''])
         ];
     }
 }
