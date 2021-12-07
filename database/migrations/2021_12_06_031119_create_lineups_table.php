@@ -15,6 +15,11 @@ class CreateLineupsTable extends Migration
     {
         Schema::create('lineups', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->cascade('delete');
             $table->timestamps();
         });
     }

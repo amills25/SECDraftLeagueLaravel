@@ -23,7 +23,9 @@ Route::prefix('v1')->group(function () {
         Route::apiResource('/users', UserController::class);
         Route::apiResource('/logout', UserController::class);
         Route::post('/blogpost/edit', [BlogPostController::class, 'update']);
+        Route::post('/lineup/edit', [LineupController::class, 'update']);
     });
 
     Route::get('/blogpost', [BlogPostController::class, 'index']);
+    Route::get('/lineup', [LineupController::class, 'index']);
 });

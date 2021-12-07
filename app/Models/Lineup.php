@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Lineup extends Model
 {
     use HasFactory;
+
+    protected $table = 'roster';
+
+    protected $fillable = ['content'];
 }

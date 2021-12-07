@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Lineup;
+use Database\Factories\LineupFactory;
 use Illuminate\Database\Seeder;
 
 class LineupSeeder extends Seeder
@@ -13,6 +15,8 @@ class LineupSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Lineup::factory()
+            ->count(6)
+            ->create();
     }
 }
