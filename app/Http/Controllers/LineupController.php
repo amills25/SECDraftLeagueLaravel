@@ -76,23 +76,19 @@ class LineupController extends Controller
         //TO DO: deconstruct generateRows helper from react
         $athlete = Athlete::find($request->athlete_id);
 
+        $athlete->active = $request->active;
         $athlete->name = $request->name;
         $athlete->team = $request->team;
 
         $athlete->save();
-        //WeekController->update
 
-        //in react:
-        //-get roster data
-        //-get the athlete id for each player on a team
-        //-loop through each athlete
-        // -filter the data for each athlete by week
-        // -set player name and team in the object
-        // -loop through each week
-        // --record the input points data for each player for each week
-        // -add each obj row points together to get total for the player
-        // -push the rows data into the object
-        // return rows
+        //WeekController->update
+        $week = Week::find($request->week_id);
+
+        $week->points = $request->points;
+        $week->week_number = $request->week_number;
+
+        $week->save();
     }
 
     /**

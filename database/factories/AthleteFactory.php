@@ -14,6 +14,7 @@ class AthleteFactory extends Factory
     public function definition()
     {
         return [
+            'active' => false,
             'name' => '',
             'team' => ''
         ];

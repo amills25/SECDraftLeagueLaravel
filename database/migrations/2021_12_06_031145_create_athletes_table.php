@@ -15,6 +15,7 @@ class CreateAthletesTable extends Migration
     {
         Schema::create('athletes', function (Blueprint $table) {
             $table->id();
+            $table->boolean('active');
             $table->string('name');
             $table->string('team');
             $table->timestamps();

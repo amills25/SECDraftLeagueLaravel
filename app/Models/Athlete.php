@@ -11,7 +11,7 @@ class Athlete extends Model
 
     protected $table = 'athletes';
 
-    protected $fillable = ['name', 'team'];
+    protected $fillable = ['active', 'name', 'team'];
 
     public function weeks()
     {

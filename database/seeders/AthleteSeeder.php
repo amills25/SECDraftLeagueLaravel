@@ -16,6 +16,7 @@ class AthleteSeeder extends Seeder
     {
         for ($i = 0; $i < 54; $i++) {
             $athlete = new Athlete();
+            $athlete->active = false;
             $athlete->name = '';
             $athlete->team = '';
             $athlete->save();

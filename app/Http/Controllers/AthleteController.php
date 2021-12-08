@@ -73,6 +73,7 @@ class AthleteController extends Controller
     {
         $athlete = Athlete::find($request->athlete_id);
 
+        $athlete->active = $request->active;
         $athlete->name = $request->name;
         $athlete->team = $request->team;
 
