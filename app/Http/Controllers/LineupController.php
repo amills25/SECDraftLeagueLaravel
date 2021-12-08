@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreLineupRequest;
-use App\Http\Requests\UpdateLineupRequest;
+use Illuminate\Http\Request;
 use App\Models\Lineup;
 use App\Models\Athlete;
 use App\Models\Week;
+use Illuminate\Support\Facades\Log;
 
 class LineupController extends Controller
 {
@@ -36,7 +36,7 @@ class LineupController extends Controller
      * @param  \App\Http\Requests\StoreLineupRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreLineupRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -70,30 +70,37 @@ class LineupController extends Controller
      * @param  \App\Models\Lineup  $lineup
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateLineupRequest $request, Lineup $lineup)
+    public function update(Request $request)
     {
-        dd($request);
+        Log::debug($request);
         //TO DO: deconstruct generateRows helper from react
         //update the athlete, and make a for loop to update all 10 of the individual weeks per athlete
-        $athlete = Athlete::find($request->athlete_id);
+        //loop through rows and adjust the athlete
+        $lineup = Lineup::find($request->lineup());
 
-        $athlete->active = $request->active;
-        $athlete->name = $request->name;
-        $athlete->team = $request->team;
+        for ($i = 1; $i <= 9; $i++) {
+            $athlete = Athlete::find($request->athlete_id);
 
-        $athlete->save();
+            $athlete->active = $request[$i]->toggled;
+            $athlete->name = $request[$i]->name;
+            $athlete->team = $request[$i]->team;
 
-        for ($i = 1; $i <= 10; $i++) {
-            //update all 10 of the individual weeks per athlete
+            $athlete->save();
         }
 
+        //loop through rows and adjust the week
+        for ($i = 1; $i <= 10; $i++) {
+            $week = Week::find($request->week_id);
 
-        $week = Week::find($request->week_id);
+            $week->athlete_id = $request[$i]->athlete_id;
+            $week->lineup_id = $request[$i]->lineup_id;
+            $week->points = $request[$i]->points;
+            $week->week_number = $request[$i]->week_number;
 
-        $week->points = $request->points;
-        $week->week_number = $request->week_number;
+            $week->save();
+        }
 
-        $week->save();
+        $lineup->save();
     }
 
     /**
