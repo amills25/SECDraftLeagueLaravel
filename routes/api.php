@@ -28,6 +28,7 @@ Route::prefix('v1')->group(function () {
         Route::post('/blogpost/edit', [BlogPostController::class, 'update']);
         Route::post('/week/edit', [WeekController::class, 'update']);
         Route::post('/athlete/edit', [AthleteController::class, 'update']);
+        Route::post('/lineup/edit', [LineupController::class, 'update']);
     });
 
     Route::get('/blogpost', [BlogPostController::class, 'index']);
