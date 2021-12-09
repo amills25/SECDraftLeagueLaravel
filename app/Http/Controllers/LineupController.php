@@ -72,12 +72,14 @@ class LineupController extends Controller
      */
     public function update(Request $request)
     {
-        Log::debug($request);
+        // Log::debug($request);
         //TO DO: deconstruct generateRows helper from react
         //update the athlete, and make a for loop to update all 10 of the individual weeks per athlete
         //loop through rows and adjust the athlete
         $lineup = Lineup::find($request->lineup_id);
 
+
+        //loop through rows and adjust the week
         for ($i = 0; $i < 9; $i++) {
             $athlete = Athlete::find($request->rows[$i]['active']['props']['athleteID']);
 
@@ -86,20 +88,21 @@ class LineupController extends Controller
             $athlete->active = $request->rows[$i]['toggled'];
 
             $athlete->save();
-            //loop through rows and adjust the week
-            for ($j = 0; $j < 10; $j++) {
-                $week = Week::find($j);
 
-                $week->athlete_id = $request->rows[$i]['active']['props']['athleteID'];
+            //loop through rows and adjust the week
+            for ($j = 0; $j < count($request->rows[$i]['wkData']); $j++) {
+                $weekObj = $request->rows[$i]['wkData'][$j];
+                Log::debug($weekObj);
+                $week = Week::find($weekObj['id']);
+
+                $week->points = $weekObj['points'];
+                // $week->athlete_id = $request->rows[$i]['active']['props']['athleteID'];
                 // $week->lineup_id = $request[$i]->lineup_id;
-                $week->points = $request->rows[$i]['week' . ($j + 1)];
                 // $week->week_number = $request[$i]->week_number;
 
                 $week->save();
             }
         }
-
-
         $lineup->save();
     }
 
