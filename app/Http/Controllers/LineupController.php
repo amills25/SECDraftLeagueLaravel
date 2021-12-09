@@ -76,21 +76,21 @@ class LineupController extends Controller
         //TO DO: deconstruct generateRows helper from react
         //update the athlete, and make a for loop to update all 10 of the individual weeks per athlete
         //loop through rows and adjust the athlete
-        $lineup = Lineup::find($request->lineup());
+        $lineup = Lineup::find($request->lineup_id);
 
         for ($i = 1; $i <= 9; $i++) {
-            $athlete = Athlete::find($request->athlete_id);
+            $athlete = Athlete::find($request->rows[$i]['active']['props']['athleteID']);
 
-            $athlete->active = $request[$i]->toggled;
-            $athlete->name = $request[$i]->name;
-            $athlete->team = $request[$i]->team;
+            $athlete->name = $request->rows[$i]['name'];
+            $athlete->team = $request->rows[$i]['team'];
+            $athlete->active = $request->rows[$i]['toggled'];
 
             $athlete->save();
         }
 
         //loop through rows and adjust the week
         for ($i = 1; $i <= 10; $i++) {
-            $week = Week::find($request->week_id);
+            $week = Week::find($request->wk_id);
 
             $week->athlete_id = $request[$i]->athlete_id;
             $week->lineup_id = $request[$i]->lineup_id;

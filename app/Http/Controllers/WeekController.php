@@ -71,7 +71,7 @@ class WeekController extends Controller
      */
     public function update(UpdateWeekRequest $request)
     {
-        $week = Week::find($request->week_id);
+        $week = Week::find($request->wk_id);
 
         $week->points = $request->points;
         $week->week_number = $request->week_number;
