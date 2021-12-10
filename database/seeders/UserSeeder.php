@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
             "Joel Storrow",
             "Dylan Prezkop",
             "Clark Spencer",
-            "Jeff Zimmer"
+            "Team Zimmer"
         ];
         $emails = [
             "millskysec@gmail.com",
@@ -31,12 +31,20 @@ class UserSeeder extends Seeder
             "clark40ball@yahoo.com",
             "jzimmer@best-in-class.com"
         ];
+        $passwords = [
+            "Champ15!",
+            "Slammy23!",
+            "Heelmakers1",
+            "Dprez304",
+            "Miami305",
+            "Wildcats1"
+        ];
 
         for ($i = 0; $i < count($emails); $i++) {
             $user = new User();
             $user->name = $members[$i];
             $user->email = $emails[$i];
-            $user->password = Hash::make('Wildcats1');
+            $user->password = Hash::make($passwords[$i]);
             $user->save();
         }
     }
