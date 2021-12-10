@@ -36,7 +36,7 @@ class UserSeeder extends Seeder
             "Slammy23!",
             "Kathy2020",
             "Dprez304",
-            "Sportsnut2",
+            "20pointbonus",
             "Zimmer13"
         ];
 
