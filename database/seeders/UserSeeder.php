@@ -26,18 +26,18 @@ class UserSeeder extends Seeder
         $emails = [
             "millskysec@gmail.com",
             "awmills25@gmail.com",
-            "joel.storrow@mcgillengineers.com",
+            "joelstorrow@gmail.com",
             "dprez35@yahoo.com",
             "clark40ball@yahoo.com",
-            "jzimmer@best-in-class.com"
+            "kemzim@msn.com"
         ];
         $passwords = [
             "Champ15!",
             "Slammy23!",
-            "Heelmakers1",
+            "Kathy2020",
             "Dprez304",
-            "Miami305",
-            "Wildcats1"
+            "Sportsnut2",
+            "Zimmer13"
         ];
 
         for ($i = 0; $i < count($emails); $i++) {

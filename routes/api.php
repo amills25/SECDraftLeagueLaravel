@@ -31,6 +31,7 @@ Route::prefix('v1')->group(function () {
         Route::post('/lineup/edit', [LineupController::class, 'update']);
     });
 
+    Route::get('/allUsers', [UserController::class, 'allUsers']);
     Route::get('/blogpost', [BlogPostController::class, 'index']);
     Route::get('/lineup', [LineupController::class, 'index']);
     Route::get('/week', [WeekController::class, 'index']);
