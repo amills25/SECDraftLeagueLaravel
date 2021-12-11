@@ -138,7 +138,6 @@ class UserController extends Controller
 
     public function allUsers(Request $request)
     {
-        // return User::all();
         return User::with('lineup.weeks')->get();
     }
 }
