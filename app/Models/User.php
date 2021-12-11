@@ -39,4 +39,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserMembership::class);
     }
+
+    //SAT: added lineup function below
+    public function lineup()
+    {
+        return $this->hasOne(Lineup::class);
+    }
 }

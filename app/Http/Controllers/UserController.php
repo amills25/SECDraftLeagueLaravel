@@ -33,10 +33,11 @@ class UserController extends Controller
         }
     }
 
+    //SAT: ADDED 'LINEUP'
     public function user(Request $request)
     {
         $user = $request->user();
-        $userData = User::with(['userMemberships.membership'])->where('id', $user->id)->get();
+        $userData = User::with(['userMemberships.membership', 'lineup'])->where('id', $user->id)->get();
         return $userData;
     }
 

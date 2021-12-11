@@ -20,6 +20,14 @@ class LineupController extends Controller
         return Lineup::with(['user', 'weeks.athlete'])->get();
     }
 
+    //SAT: ADDED linup function below
+    public function lineup(Request $request)
+    {
+        $lineup = $request->lineup();
+        $lineupData = User::with(['weeks'])->get();
+        return $lineupData;
+    }
+
     /**
      * Show the form for creating a new resource.
      *
