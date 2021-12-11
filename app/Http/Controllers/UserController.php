@@ -37,7 +37,7 @@ class UserController extends Controller
     public function user(Request $request)
     {
         $user = $request->user();
-        $userData = User::with(['userMemberships.membership', 'lineup'])->where('id', $user->id)->get();
+        $userData = User::with(['userMemberships.membership', 'lineup.weeks'])->where('id', $user->id)->get();
         return $userData;
     }
 
@@ -138,6 +138,7 @@ class UserController extends Controller
 
     public function allUsers(Request $request)
     {
-        return User::all();
+        // return User::all();
+        return User::with('lineup.weeks')->get();
     }
 }
